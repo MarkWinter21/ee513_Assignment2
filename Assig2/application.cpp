@@ -14,7 +14,7 @@ using namespace std;
 using namespace exploringRPi;
 
 //Please replace the following address with the address of your server
-#define ADDRESS "tcp://192.168.8.103:1883"
+#define ADDRESS "tcp://192.168.1.97:1883"
 #define CLIENTID "rpi1"
 #define AUTHMETHOD "Hooke915!"
 #define AUTHTOKEN "Hooke915!"
@@ -71,6 +71,7 @@ willOpts.message = "Last will triggered";
 willOpts.retained = 0;
 willOpts.qos =1;
 
+
 opts.keepAliveInterval = 20;
 opts.cleansession = 1;
 opts.username = AUTHMETHOD;
@@ -82,7 +83,7 @@ cout << "Failed to connect, return code " << rc << endl;
 
 return -1;
 }
-sprintf(str_payload, "{\"d\":{\"CPUTemp\": %.2f, \"Pitch\": %.2f, \"Roll\": %.2f, \"Time\": %.2f}", getCPUTemperature(), sensor.getPitch(), sensor.getRoll(), (double)elapsed);
+sprintf(str_payload, "{\"CPUTemp\": %.2f, \"Pitch\": %.2f, \"Roll\": %.2f, \"Time\": %.2f}", getCPUTemperature(), sensor.getPitch(), sensor.getRoll(), (double)elapsed);
 pubmsg.payload = str_payload;
 pubmsg.payloadlen = strlen(str_payload);
 pubmsg.qos = 1;
